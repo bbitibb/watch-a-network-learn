@@ -1,0 +1,2 @@
+- \backend: python -m uvicorn main:app --reload
+- \frontend: python -m http.server 8080

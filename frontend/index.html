@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    body { font-family: sans-serif; }
+    #side-by-side img { border: 1px solid #ccc; }
+    </style>
+    <meta charset="UTF-8">
+    <title>Autoencoder Visualizer</title>
+</head>
+<body>
+    <h1>Autoencoder Learning Visualizer</h1>
+    <form id="uploadForm">
+        <input type="file" id="imgInput" accept="image/*" required>
+        <button type="submit">Upload & Train</button>
+    </form>
+    <div id="status"></div>
+    <br>
+    <div>
+        <input type="range" id="epochSlider" min="0" max="0" value="0">
+        <span id="epochLabel"></span>
+    </div>
+<div style="display: flex; gap: 32px; align-items: flex-start;">
+    <div>
+        <p>Original Image</p>
+        <img id="origImg" width="256" />
+    </div>
+    <div>
+        <p>Reconstruction</p>
+        <img id="reconImg" width="256" />
+        <p id="lossDisplay"></p>
+    </div>
+</div>
+    <script src="app.js"></script>
+</body>
+</html>
