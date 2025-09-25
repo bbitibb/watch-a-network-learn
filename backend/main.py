@@ -14,7 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For dev only; restrict for production!
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -22,7 +22,7 @@ app.add_middleware(
 
 @app.post("/upload")
 async def upload_image(file: UploadFile = File(...), background_tasks: BackgroundTasks = None):
-    print(f"Received file: {file.filename}")  # <-- ADD THIS LINE
+    print(f"Received file: {file.filename}") 
     path = os.path.join(UPLOAD_DIR, file.filename)
     with open(path, "wb") as f:
         f.write(await file.read())
@@ -31,12 +31,10 @@ async def upload_image(file: UploadFile = File(...), background_tasks: Backgroun
 
 @app.get("/epochs")
 def num_epochs():
-    # Returns number of epochs completed (after training)
     return {"num_epochs": get_num_epochs()}
 
 @app.get("/reconstruction/{epoch}")
 def get_reconstruction(epoch: int):
-    # Returns reconstructed image at given epoch as file
     path = get_reconstruction_path(epoch)
     if os.path.exists(path):
         return FileResponse(path, media_type="image/png")
@@ -44,5 +42,4 @@ def get_reconstruction(epoch: int):
 
 @app.get("/losses")
 def losses():
-    # Returns list of losses per epoch
     return {"losses": get_losses()}
